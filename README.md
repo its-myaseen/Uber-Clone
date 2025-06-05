@@ -399,8 +399,16 @@ The system maintains a collection of blacklisted tokens to prevent their reuse a
 ## Database Schema
 ```typescript
 interface BlackListToken {
-  token: string;    // The JWT token to blacklist
-  createdAt: Date;  // Automatically set, used for token expiration
+  token: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now,
+        expires: 60 * 60 * 24 // 24 hours in seconds
+    }  // Automatically set, used for token expiration
 }
 ```
 
